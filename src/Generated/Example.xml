@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Versions>
+  <SqlVersion>
+    <Version>0</Version>
+    <Subversion>0</Subversion>
+    <Comment>Example 1</Comment>
+    <Query>
+	  CREATE TABLE Example (
+      Id int IDENTITY(1,1) NOT NULL,
+      Text nvarchar(100)  NOT NULL
+      );
+
+    </Query>
+  </SqlVersion>
+  <SqlVersion>
+    <Version>0</Version>
+    <Subversion>1</Subversion>
+    <Comment>Example 2</Comment>
+    <Query>
+      insert into Example(Text) values ('Test');
+    </Query>
+  </SqlVersion>
+</Versions>

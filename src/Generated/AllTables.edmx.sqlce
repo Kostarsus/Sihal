@@ -1,0 +1,522 @@
+
+-- --------------------------------------------------
+-- Entity Designer DDL Script for SQL Server Compact Edition
+-- --------------------------------------------------
+-- Date Created: 05/26/2013 20:59:54
+-- Generated from EDMX file: C:\Entwicklung\Dargoskop\DataManager\model\all\AllTables.edmx
+-- --------------------------------------------------
+
+
+-- --------------------------------------------------
+-- Dropping existing FOREIGN KEY constraints
+-- NOTE: if the constraint does not exist, an ignorable error will be reported.
+-- --------------------------------------------------
+
+    ALTER TABLE [Profiencies] DROP CONSTRAINT [FK_Profiency_Catalogue];
+GO
+    ALTER TABLE [Charakters] DROP CONSTRAINT [FK_Charakter_Group];
+GO
+    ALTER TABLE [Charakters] DROP CONSTRAINT [FK_Charakter_Player];
+GO
+    ALTER TABLE [Profiencies] DROP CONSTRAINT [FK_Profiency_Character];
+GO
+    ALTER TABLE [Groups] DROP CONSTRAINT [FK_C_Group_Calendar];
+GO
+    ALTER TABLE [CalendarMonth] DROP CONSTRAINT [FK_Cal_MonthFantasyCalendar];
+GO
+    ALTER TABLE [CalendarWeekday] DROP CONSTRAINT [FK_Cal_WeekdayFantasyCalendar];
+GO
+    ALTER TABLE [CurCalendars] DROP CONSTRAINT [FK_CurCalendarGroup];
+GO
+    ALTER TABLE [DataTreeItem] DROP CONSTRAINT [FK_DataTreeDataTree];
+GO
+    ALTER TABLE [DataTreeItem_BinaryData] DROP CONSTRAINT [FK_BinaryData_inherits_DataTreeItem];
+GO
+    ALTER TABLE [DataTreeItem_Folder] DROP CONSTRAINT [FK_Folder_inherits_DataTreeItem];
+GO
+    ALTER TABLE [DataTreeItem_Link] DROP CONSTRAINT [FK_Link_inherits_DataTreeItem];
+GO
+
+-- --------------------------------------------------
+-- Dropping existing tables
+-- NOTE: if the table does not exist, an ignorable error will be reported.
+-- --------------------------------------------------
+
+    DROP TABLE [CalendarMonth];
+GO
+    DROP TABLE [CalendarWeekday];
+GO
+    DROP TABLE [Cat_Feat];
+GO
+    DROP TABLE [Cat_Profiency];
+GO
+    DROP TABLE [Charakters];
+GO
+    DROP TABLE [CurCalendars];
+GO
+    DROP TABLE [FantasyCalendars];
+GO
+    DROP TABLE [Groups];
+GO
+    DROP TABLE [Players];
+GO
+    DROP TABLE [Profiencies];
+GO
+    DROP TABLE [XPs];
+GO
+    DROP TABLE [Configuration];
+GO
+    DROP TABLE [DataTreeItem];
+GO
+    DROP TABLE [VersionEntities];
+GO
+    DROP TABLE [DataTreeItem_BinaryData];
+GO
+    DROP TABLE [DataTreeItem_Folder];
+GO
+    DROP TABLE [DataTreeItem_Link];
+GO
+
+-- --------------------------------------------------
+-- Creating all tables
+-- --------------------------------------------------
+
+-- Creating table 'CalendarMonth'
+CREATE TABLE [CalendarMonth] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(100)  NOT NULL,
+    [Order] int  NOT NULL,
+    [CalendarId] int  NOT NULL,
+    [Jahreszeit] smallint  NOT NULL,
+    [Days] int  NOT NULL,
+    [IsFixed] bit  NOT NULL
+);
+GO
+
+-- Creating table 'CalendarWeekday'
+CREATE TABLE [CalendarWeekday] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(100)  NOT NULL,
+    [CalendarId] int  NOT NULL,
+    [Order] int  NOT NULL,
+    [IsFixed] bit  NOT NULL
+);
+GO
+
+-- Creating table 'Cat_Feat'
+CREATE TABLE [Cat_Feat] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(100)  NOT NULL,
+    [Description] ntext  NULL
+);
+GO
+
+-- Creating table 'Cat_Profiency'
+CREATE TABLE [Cat_Profiency] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(100)  NOT NULL,
+    [Attribute] nvarchar(100)  NULL,
+    [Description] ntext  NULL
+);
+GO
+
+-- Creating table 'Charakters'
+CREATE TABLE [Charakters] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [GroupId] int  NULL,
+    [PlayerId] int  NULL,
+    [Alignment] int  NOT NULL,
+    [Strength] int  NOT NULL,
+    [Dexterity] int  NOT NULL,
+    [Constitution] int  NOT NULL,
+    [Inteligence] int  NOT NULL,
+    [Wisdom] int  NOT NULL,
+    [Charisma] int  NOT NULL,
+    [Race] int  NOT NULL,
+    [AC] int  NOT NULL,
+    [Reflex] int  NOT NULL,
+    [Fortitude] int  NOT NULL,
+    [Will] int  NOT NULL,
+    [Hitpoints] int  NOT NULL,
+    [Speed] int  NULL,
+    [Lift_Overhead] int  NOT NULL,
+    [Name] nvarchar(100)  NOT NULL,
+    [Class] nvarchar(255)  NOT NULL,
+    [Level] nvarchar(100)  NOT NULL
+);
+GO
+
+-- Creating table 'CurCalendars'
+CREATE TABLE [CurCalendars] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Date] nvarchar(100)  NULL,
+    [MonthId] int  NULL,
+    [WeekdayId] int  NULL,
+    [Year] int  NULL,
+    [GroupId] int  NOT NULL,
+    [InitializeDay] int  NOT NULL,
+    [InitializeMonth] int  NOT NULL,
+    [InitializeYear] int  NOT NULL
+);
+GO
+
+-- Creating table 'FantasyCalendars'
+CREATE TABLE [FantasyCalendars] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(100)  NOT NULL,
+    [World] nvarchar(100)  NULL,
+    [IsFixed] bit  NOT NULL
+);
+GO
+
+-- Creating table 'Groups'
+CREATE TABLE [Groups] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [CampaignName] nvarchar(100)  NOT NULL,
+    [CalendarTypeId] int  NULL
+);
+GO
+
+-- Creating table 'Players'
+CREATE TABLE [Players] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Playername] nvarchar(100)  NULL
+);
+GO
+
+-- Creating table 'Profiencies'
+CREATE TABLE [Profiencies] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [ProfiencyId] int  NOT NULL,
+    [CharakterId] int  NOT NULL,
+    [Value] int  NOT NULL
+);
+GO
+
+-- Creating table 'XPs'
+CREATE TABLE [XPs] (
+    [CR] real  NOT NULL,
+    [PlayerLevel] smallint  NOT NULL,
+    [Experience] int  NOT NULL,
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [IsFixed] bit  NOT NULL
+);
+GO
+
+-- Creating table 'Configuration'
+CREATE TABLE [Configuration] (
+    [ID] bigint IDENTITY(1,1) NOT NULL,
+    [Path] nvarchar(4000)  NOT NULL,
+    [Value] nvarchar(4000)  NULL,
+    [BinaryValue] varbinary(8000)  NULL
+);
+GO
+
+-- Creating table 'DataTreeItem'
+CREATE TABLE [DataTreeItem] (
+    [ID] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(50)  NOT NULL,
+    [Description] ntext  NULL,
+    [IsFixed] bit  NOT NULL,
+    [Parent_ID] int  NULL
+);
+GO
+
+-- Creating table 'VersionEntities'
+CREATE TABLE [VersionEntities] (
+    [ID] bigint IDENTITY(1,1) NOT NULL,
+    [PrimaryVersion] int  NOT NULL,
+    [SecondaryVersion] int  NOT NULL,
+    [Installdate] datetime  NOT NULL
+);
+GO
+
+-- Creating table 'DataTreeItem_BinaryData'
+CREATE TABLE [DataTreeItem_BinaryData] (
+    [FileData] varbinary(8000)  NOT NULL,
+    [FileType] int  NOT NULL,
+    [FilePath] nvarchar(4000)  NOT NULL,
+    [ID] int  NOT NULL
+);
+GO
+
+-- Creating table 'DataTreeItem_Folder'
+CREATE TABLE [DataTreeItem_Folder] (
+    [Guid] nvarchar(4000)  NOT NULL,
+    [ID] int  NOT NULL
+);
+GO
+
+-- Creating table 'DataTreeItem_Link'
+CREATE TABLE [DataTreeItem_Link] (
+    [Url] nvarchar(4000)  NOT NULL,
+    [ID] int  NOT NULL
+);
+GO
+
+-- --------------------------------------------------
+-- Creating all PRIMARY KEY constraints
+-- --------------------------------------------------
+
+-- Creating primary key on [Id] in table 'CalendarMonth'
+ALTER TABLE [CalendarMonth]
+ADD CONSTRAINT [PK_Cal_Month]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'CalendarWeekday'
+ALTER TABLE [CalendarWeekday]
+ADD CONSTRAINT [PK_Cal_Weekday]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'Cat_Feat'
+ALTER TABLE [Cat_Feat]
+ADD CONSTRAINT [PK_Cat_Feat]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'Cat_Profiency'
+ALTER TABLE [Cat_Profiency]
+ADD CONSTRAINT [PK_Cat_Profiency]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'Charakters'
+ALTER TABLE [Charakters]
+ADD CONSTRAINT [PK_Charakters]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'CurCalendars'
+ALTER TABLE [CurCalendars]
+ADD CONSTRAINT [PK_CurCalendars]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'FantasyCalendars'
+ALTER TABLE [FantasyCalendars]
+ADD CONSTRAINT [PK_FantasyCalendars]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'Groups'
+ALTER TABLE [Groups]
+ADD CONSTRAINT [PK_Groups]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'Players'
+ALTER TABLE [Players]
+ADD CONSTRAINT [PK_Players]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'Profiencies'
+ALTER TABLE [Profiencies]
+ADD CONSTRAINT [PK_Profiencies]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [Id] in table 'XPs'
+ALTER TABLE [XPs]
+ADD CONSTRAINT [PK_XPs]
+    PRIMARY KEY ([Id] );
+GO
+
+-- Creating primary key on [ID] in table 'Configuration'
+ALTER TABLE [Configuration]
+ADD CONSTRAINT [PK_Configuration]
+    PRIMARY KEY ([ID] );
+GO
+
+-- Creating primary key on [ID] in table 'DataTreeItem'
+ALTER TABLE [DataTreeItem]
+ADD CONSTRAINT [PK_DataTreeItem]
+    PRIMARY KEY ([ID] );
+GO
+
+-- Creating primary key on [ID] in table 'VersionEntities'
+ALTER TABLE [VersionEntities]
+ADD CONSTRAINT [PK_VersionEntities]
+    PRIMARY KEY ([ID] );
+GO
+
+-- Creating primary key on [ID] in table 'DataTreeItem_BinaryData'
+ALTER TABLE [DataTreeItem_BinaryData]
+ADD CONSTRAINT [PK_DataTreeItem_BinaryData]
+    PRIMARY KEY ([ID] );
+GO
+
+-- Creating primary key on [ID] in table 'DataTreeItem_Folder'
+ALTER TABLE [DataTreeItem_Folder]
+ADD CONSTRAINT [PK_DataTreeItem_Folder]
+    PRIMARY KEY ([ID] );
+GO
+
+-- Creating primary key on [ID] in table 'DataTreeItem_Link'
+ALTER TABLE [DataTreeItem_Link]
+ADD CONSTRAINT [PK_DataTreeItem_Link]
+    PRIMARY KEY ([ID] );
+GO
+
+-- --------------------------------------------------
+-- Creating all FOREIGN KEY constraints
+-- --------------------------------------------------
+
+-- Creating foreign key on [ProfiencyId] in table 'Profiencies'
+ALTER TABLE [Profiencies]
+ADD CONSTRAINT [FK_Profiency_Catalogue]
+    FOREIGN KEY ([ProfiencyId])
+    REFERENCES [Cat_Profiency]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Profiency_Catalogue'
+CREATE INDEX [IX_FK_Profiency_Catalogue]
+ON [Profiencies]
+    ([ProfiencyId]);
+GO
+
+-- Creating foreign key on [GroupId] in table 'Charakters'
+ALTER TABLE [Charakters]
+ADD CONSTRAINT [FK_Charakter_Group]
+    FOREIGN KEY ([GroupId])
+    REFERENCES [Groups]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Charakter_Group'
+CREATE INDEX [IX_FK_Charakter_Group]
+ON [Charakters]
+    ([GroupId]);
+GO
+
+-- Creating foreign key on [PlayerId] in table 'Charakters'
+ALTER TABLE [Charakters]
+ADD CONSTRAINT [FK_Charakter_Player]
+    FOREIGN KEY ([PlayerId])
+    REFERENCES [Players]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Charakter_Player'
+CREATE INDEX [IX_FK_Charakter_Player]
+ON [Charakters]
+    ([PlayerId]);
+GO
+
+-- Creating foreign key on [CharakterId] in table 'Profiencies'
+ALTER TABLE [Profiencies]
+ADD CONSTRAINT [FK_Profiency_Character]
+    FOREIGN KEY ([CharakterId])
+    REFERENCES [Charakters]
+        ([Id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Profiency_Character'
+CREATE INDEX [IX_FK_Profiency_Character]
+ON [Profiencies]
+    ([CharakterId]);
+GO
+
+-- Creating foreign key on [CalendarTypeId] in table 'Groups'
+ALTER TABLE [Groups]
+ADD CONSTRAINT [FK_C_Group_Calendar]
+    FOREIGN KEY ([CalendarTypeId])
+    REFERENCES [FantasyCalendars]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_C_Group_Calendar'
+CREATE INDEX [IX_FK_C_Group_Calendar]
+ON [Groups]
+    ([CalendarTypeId]);
+GO
+
+-- Creating foreign key on [CalendarId] in table 'CalendarMonth'
+ALTER TABLE [CalendarMonth]
+ADD CONSTRAINT [FK_Cal_MonthFantasyCalendar]
+    FOREIGN KEY ([CalendarId])
+    REFERENCES [FantasyCalendars]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Cal_MonthFantasyCalendar'
+CREATE INDEX [IX_FK_Cal_MonthFantasyCalendar]
+ON [CalendarMonth]
+    ([CalendarId]);
+GO
+
+-- Creating foreign key on [CalendarId] in table 'CalendarWeekday'
+ALTER TABLE [CalendarWeekday]
+ADD CONSTRAINT [FK_Cal_WeekdayFantasyCalendar]
+    FOREIGN KEY ([CalendarId])
+    REFERENCES [FantasyCalendars]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_Cal_WeekdayFantasyCalendar'
+CREATE INDEX [IX_FK_Cal_WeekdayFantasyCalendar]
+ON [CalendarWeekday]
+    ([CalendarId]);
+GO
+
+-- Creating foreign key on [GroupId] in table 'CurCalendars'
+ALTER TABLE [CurCalendars]
+ADD CONSTRAINT [FK_CurCalendarGroup]
+    FOREIGN KEY ([GroupId])
+    REFERENCES [Groups]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CurCalendarGroup'
+CREATE INDEX [IX_FK_CurCalendarGroup]
+ON [CurCalendars]
+    ([GroupId]);
+GO
+
+-- Creating foreign key on [Parent_ID] in table 'DataTreeItem'
+ALTER TABLE [DataTreeItem]
+ADD CONSTRAINT [FK_DataTreeDataTree]
+    FOREIGN KEY ([Parent_ID])
+    REFERENCES [DataTreeItem]
+        ([ID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_DataTreeDataTree'
+CREATE INDEX [IX_FK_DataTreeDataTree]
+ON [DataTreeItem]
+    ([Parent_ID]);
+GO
+
+-- Creating foreign key on [ID] in table 'DataTreeItem_BinaryData'
+ALTER TABLE [DataTreeItem_BinaryData]
+ADD CONSTRAINT [FK_BinaryData_inherits_DataTreeItem]
+    FOREIGN KEY ([ID])
+    REFERENCES [DataTreeItem]
+        ([ID])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID] in table 'DataTreeItem_Folder'
+ALTER TABLE [DataTreeItem_Folder]
+ADD CONSTRAINT [FK_Folder_inherits_DataTreeItem]
+    FOREIGN KEY ([ID])
+    REFERENCES [DataTreeItem]
+        ([ID])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [ID] in table 'DataTreeItem_Link'
+ALTER TABLE [DataTreeItem_Link]
+ADD CONSTRAINT [FK_Link_inherits_DataTreeItem]
+    FOREIGN KEY ([ID])
+    REFERENCES [DataTreeItem]
+        ([ID])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- --------------------------------------------------
+-- Script has ended
+-- --------------------------------------------------
