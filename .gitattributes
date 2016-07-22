@@ -15,4 +15,7 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
-*.zip  diff=astextplain
+
+# Binaries
+*.exe binary
+*.zip binary
