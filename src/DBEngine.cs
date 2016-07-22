@@ -91,6 +91,8 @@ namespace Squirt
                             }
                         }
                         transaction.Commit();
+                        MainWindow.Instance.AddProtocolEntry(string.Format("Version {0}, Subversion {1} installed", version, subversion));
+
                     }
                     catch
                     {
